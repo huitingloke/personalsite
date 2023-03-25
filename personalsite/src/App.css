@@ -1,0 +1,14 @@
+* {
+  text-align: center;
+  background-color: black;
+  color: pink;
+}
+
+img {
+  border-radius: 15px;
+  width: 40%;
+}
+
+table {
+  border-color: white;
+}
