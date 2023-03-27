@@ -1,13 +1,68 @@
 import './App.css';
 import { Link } from "react-router-dom";
 
-const headerStyle = "text-center montserrat text-5xl bold italic my-5 flex flex-col justify-center";
+const headerStyle = "text-center montserrat text-5xl bold italic my-7 flex flex-col justify-center";
 
-const Footer = () => {
+const SkillList = (props) => {
+  console.log(props);
+  const skillname = props.skillname;
+  const skilllist = props.skilltype;
+  const image = props.image;
+  console.log(skilllist);
   return (
-    <footer className="text-center text-xs mx-5 my-3">
-      This website is property of Bethel Loke Hui Ting. Please do not steal things or she will be very upset and cry loudly enough to embarrass the thief. You have been warned.
-    </footer>
+    <table className="m-5 w-1/3">
+      <thead>
+        <th className="text-lg">{skillname}</th>
+      </thead>
+      <tbody>
+      {skilllist.map(item =>
+        <tr>{item}</tr>
+      )}
+      <img 
+        src={image} 
+        alt="Clearly in her right mind"
+        className="rounded-full h-full w-full my-4"
+      />
+      </tbody>
+    </table>
+    );
+}
+
+const AddOnTable = () => {
+  
+  const gamerList = {
+    "Hobbies": [
+      "Blockchain Development -- Solidity, Ethereum",
+      "Sports -- Rock climbing, Muay Thai, Krav Maga",
+      "3D modelling -- Blender",
+      "Music -- instruments, singing, composing",
+      "Visual arts"
+    ],
+    "Skills": [
+      "Coding -- Python, Javascript, PHP", 
+      "Databases -- MySQL, SQLLite, MongoDB",
+      "Git, Node.js, Microsoft Suite",
+      "Essay writing and research",
+      "Web development -- HTML, CSS, Tailwind"
+    ],
+    "Education": [
+      "Pei Hwa Presbyterian Primary School",
+      "ACS International",
+      "Singapore Management University"
+    ]
+  }
+
+  return (
+    <div className="flex flex-row">
+      <SkillList skilltype={gamerList["Hobbies"]} skillname="Hobbies" 
+        image={require('./sanity1.jpg')} />
+      <SkillList skilltype={gamerList["Skills"]} skillname="Skills" 
+        image={require('./sanity2.jpg')}
+      />
+      <SkillList skilltype={gamerList["Education"]} skillname="Education" 
+        image={require('./sanity3.jpg')}
+      />
+    </div>
   );
 }
 
@@ -24,14 +79,8 @@ const StatTable = () => {
   }
 
   return (
-    <table className="flex justify-center align-center text-center">
+    <table className="flex justify-center align-center text-right">
       <div>
-        <thead>
-          <tr>
-            <th className="italic">Object</th>
-            <th className="italic">Specification</th>
-          </tr>
-        </thead>
         <tbody>
           {Object.keys(STATS).map(key =>
             <tr>
@@ -57,6 +106,14 @@ const NavBar = () => {
   );
 }
 
+const Footer = () => {
+  return (
+    <footer className="text-center text-xs mx-5 my-3">
+      This website is property of Bethel Loke Hui Ting. Please do not steal things or she will be very upset and cry loudly enough to embarrass the thief. You have been warned.
+    </footer>
+  );
+}
+
 export const Projects = () => {
   return (
     <div>
@@ -67,11 +124,25 @@ export const Projects = () => {
   );
 }
 
+const Hovercards = (props) => {
+  let name = props.name, tag = props.tag;
+  return (
+    <h1>{name} {tag}</h1>
+  );
+}
+
 export const Contact = () => {
   return (
     <div>
       <NavBar />
       <h1 className={headerStyle}>Talk to me (please)</h1>
+      <div>
+        <Hovercards name="Discord" tag="> squiddy <#0771" />
+        <Hovercards name="Telegram" tag="@dobesquiddy" />
+        <Hovercards name="Email" tag="huitingloke@gmail.com" />
+        <Hovercards name="Github" tag="huitingloke" />
+        <Hovercards name="LinkedIn" tag="bethloke" />
+      </div>
       <Footer />
     </div>
   );
@@ -82,10 +153,14 @@ export const About = () => {
     <div>
       <NavBar />
       <h1 className={headerStyle}>About me...?</h1>
-      <img className="w-3/12 h-auto rounded-3xl" src={require('./icecream.jpg')} alt="Me in my glory days" />
-      <h2 className='montserrat text-center text-3xl my-4 italic'>stats</h2>
-      
-      <StatTable />
+      <div className="flex justify-center items-center">
+      <img className="w-1/5 h-auto rounded-3xl hue-rotate-180" src={require('./icecream.jpg')} alt="Me in my glory days" />
+        <div>
+          <h2 className='montserrat text-right text-3xl my-4 italic'>--- the roll i was given</h2>
+          <StatTable />
+        </div>
+      </div>
+      <AddOnTable />
       <Footer />
     </div>
   );
