@@ -79,7 +79,7 @@ const StatTable = () => {
   }
 
   return (
-    <table className="flex justify-center align-center text-right">
+    <table className="flex sm:flex-col justify-center align-center text-right">
       <div>
         <tbody>
           {Object.keys(STATS).map(key =>
@@ -101,7 +101,6 @@ const NavBar = () => {
       <Link className={linkStyle} to="/">Home</Link>
       <Link className={linkStyle} to="/about">About</Link>
       <Link className={linkStyle} to="/contact">Contact</Link>
-      <Link className={linkStyle} to="/projects">Projects</Link>
     </nav>
   );
 }
@@ -114,20 +113,17 @@ const Footer = () => {
   );
 }
 
-export const Projects = () => {
+const Hovercards = (props) => { //choose 5 images for yourslef later, please ensure they are square
+  let name = props.name, tag = props.tag, image = props.image, link = props.link;
   return (
-    <div>
-      <NavBar />
-      <h1 className={headerStyle}>Whatcha doin'?</h1>
-      <Footer />
-    </div>
-  );
-}
-
-const Hovercards = (props) => {
-  let name = props.name, tag = props.tag;
-  return (
-    <h1>{name} {tag}</h1>
+    <a href={link} className="scale-100 hover:scale-110 hover:z-10 ease-in duration-200 rounded-lg bg-white shadow-lg m-4 p-5 w-64">
+      <img src={image} alt="something" className="rounded-lg" /> 
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="mt-4 text-xl">{name}</h1>
+        <p className=""><i>{tag}</i></p>
+      </div>
+    </a>
+    
   );
 }
 
@@ -136,12 +132,12 @@ export const Contact = () => {
     <div>
       <NavBar />
       <h1 className={headerStyle}>Talk to me (please)</h1>
-      <div>
-        <Hovercards name="Discord" tag="> squiddy <#0771" />
-        <Hovercards name="Telegram" tag="@dobesquiddy" />
-        <Hovercards name="Email" tag="huitingloke@gmail.com" />
-        <Hovercards name="Github" tag="huitingloke" />
-        <Hovercards name="LinkedIn" tag="bethloke" />
+      <div className="flex flex-wrap justify-center">
+        <Hovercards name="Discord" tag="> squiddy <#0771" image={require('./LOGOdiscord.png')} link="https://discord.com" />
+        <Hovercards name="Telegram" tag="@dobesquiddy" image={require('./LOGOtelegram.png')} link="https://t.me/dobesquiddy" />
+        <Hovercards name="Email" tag="huitingloke@gmail.com" image={require('./LOGOgmail.png')} link="mailto:huitingloke@gmail.com" />
+        <Hovercards name="Github" tag="huitingloke" image={require('./LOGOgithub.png')} link="https://github.com/huitingloke" />
+        <Hovercards name="LinkedIn" tag="bethloke" image={require('./LOGOlinkedin.png')} link="https://www.linkedin.com/in/bethloke/" />
       </div>
       <Footer />
     </div>
@@ -150,10 +146,10 @@ export const Contact = () => {
 
 export const About = () => {
   return (
-    <div>
+    <div className="sm:flex sm:flex-col">
       <NavBar />
-      <h1 className={headerStyle}>About me...?</h1>
-      <div className="flex justify-center items-center">
+      <h1 className={headerStyle}>Who is this clown?</h1>
+      <div className="md:flex md:justify-center md:items-center">
       <img className="w-1/5 h-auto rounded-3xl hue-rotate-180" src={require('./icecream.jpg')} alt="Me in my glory days" />
         <div>
           <h2 className='montserrat text-right text-3xl my-4 italic'>--- the roll i was given</h2>
@@ -171,7 +167,7 @@ export function App() { //this functions as home
     <div className="width-full">
       <NavBar />
       <h1 className={headerStyle}>Welcome here, buddy.</h1>
-      <div className='flex items-center mx-8 justify-center my-10'>
+      <div className='sm:flex-row flex-col flex items-center mx-8 justify-center my-10'>
         <img className="rounded-full w-1/4" alt="hi it do be beth" src="https://avatars.githubusercontent.com/u/96629569?v=4" />
         <div className="flex flex-col text-center w-3/5">
           <h2 className='montserrat text-3xl italic my-3'>quick synopsis</h2>
